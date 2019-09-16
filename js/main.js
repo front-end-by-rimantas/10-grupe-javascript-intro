@@ -209,3 +209,143 @@ console.log('--------------');
 console.log('CIKLAS');
 console.log('--------------');
 
+// eng: loop, ltu: ciklas
+
+const numbers = [0, 5, 8, -17, 87, 99, 2019];
+
+for ( let i=0; i<numbers.length; i++ ) {
+    console.log('skaicius: ' + numbers[i]);
+}
+
+console.log('priespaskutinis skaicius: ' + numbers[ numbers.length - 2 ]);
+
+console.log('--------------');
+
+// suma intervale [0..0] = 0
+let sum = 0;
+for ( let i=0; i<=0; i++ ) {
+    sum = sum + i;
+}
+console.log('suma intervale [0..0] = ' + sum);
+
+// suma intervale [0..4] = 10
+sum = 0;
+for ( let i=0; i<=4; i++ ) {
+    sum = sum + i;
+}
+console.log('suma intervale [0..4] = ' + sum);
+
+// suma intervale [0..100] = 5050
+sum = 0;
+for ( let i=0; i<=100; i++ ) {
+    sum = sum + i;
+}
+console.log('suma intervale [0..100] = ' + sum);
+
+// suma intervale [574..815] = 168069
+sum = 0;
+for ( let i=574; i<=815; i++ ) {
+    sum = sum + i;
+}
+console.log('suma intervale [574..815] = ' + sum);
+
+// suma intervale [-50..50] = 0
+sum = 0;
+for ( let i=-50; i<=50; i++ ) {
+    sum = sum + i;
+}
+console.log('suma intervale [-50..50] = ' + sum);
+
+// suma intervale [-70..30] = -2020
+sum = 0;
+for ( let i=-70; i<=30; i++ ) {
+    sum = sum + i;
+}
+console.log('suma intervale [-70..30] = ' + sum);
+
+
+console.log('--------------');
+
+let zodis = 'abcdef';
+let atvirscias = '';
+
+// logika, kuri apvercia duoda teksta
+for ( let i=0; i<zodis.length; i++ ) {
+    atvirscias = zodis[i] + atvirscias;
+    console.log( zodis[i], atvirscias );
+}
+
+console.log(atvirscias);
+console.log('--------------');
+
+zodis = 'Labas rytas :)';
+atvirscias = '';
+for ( let i=zodis.length-1; i>=0; i-- ) {
+    atvirscias = atvirscias + zodis[i];
+    console.log( zodis[i], atvirscias );
+}
+console.log('--------------');
+
+zodis = 'sedek uzu kedes';
+atvirscias = '';
+for ( let i=0; i<zodis.length; i++ ) {
+    atvirscias = atvirscias + zodis[ zodis.length - 1 - i ];
+    console.log( zodis[i], atvirscias );
+}
+
+console.log('--------------');
+console.log('--------------');
+console.log('--------------');
+
+let nuo = 8;
+let iki = 31;
+let daliklis = 10;
+let kartai = 0;
+
+// logika
+for ( let i=nuo; i<=iki; i++ ) {
+    if ( i % daliklis === 0 ) {
+        kartai++;
+    }
+    console.log(i, kartai);
+}
+
+console.log('Skaičių intervale tarp '+nuo+' ir '+iki+', besidalinančių be liekanos iš '+daliklis+' yra '+kartai+' vienetai.');
+
+
+console.log('--------------');
+console.log('FUNKCIJOS');
+console.log('--------------');
+
+function tusciaFunkcija() {
+    return false;
+}
+
+console.log( tusciaFunkcija() );
+
+
+console.log('--------------');
+
+// typeof(16165) -> 'number'
+// typeof('tekstas') -> 'string'
+// typeof(true) -> 'boolean'
+// typeof(false) -> 'boolean'
+
+function daugyba( pirmas, antras ) {
+    if ( typeof(pirmas) !== 'number' ) {
+        return 'Klaida: pirma reiksme nera skaiciaus tipo.';
+    }
+    if ( typeof(antras) !== 'number' ) {
+        return 'Klaida: antra reiksme nera skaiciaus tipo.';
+    }
+    const sandauga = pirmas * antras;
+    return sandauga;
+}
+
+const c = 2;
+const d = 3;
+console.log( daugyba(c, d) );
+
+console.log( daugyba(7, 3) );
+console.log( daugyba('asd', 3) );
+console.log( daugyba(3, 'asd') );
