@@ -453,7 +453,7 @@ console.log('DIDZIAUSIAS SKAICIUS');
 
 function didziausiasSkaiciusSarase( list ) {
     if ( typeof(list) !== 'object' ) {
-        console.log('Klaida: reiksme turi buti saraso tipo.');
+        // console.log('Klaida: reiksme turi buti saraso tipo.');
         return 'Klaida: reiksme turi buti saraso tipo.';
     }
     if ( list.length === 0 ) {
@@ -495,3 +495,75 @@ didziausiasSkaiciusSarase( [ 1, 2, 3, 'asdasd', 4 ] );
 didziausiasSkaiciusSarase( [ -Infinity, 'asd', 2, Infinity, 3, 'asdasd', 4 ] );
 didziausiasSkaiciusSarase( [ 'asd' ] );
 didziausiasSkaiciusSarase( [ -Infinity, -Infinity, -Infinity ] );
+
+
+console.log('--------------');
+console.log('ISRENKAME RAIDES');
+
+function isrinktiRaides( tekstas, zingsnis ) {
+    if ( typeof(tekstas) !== 'string' ) {
+        console.log('Pirmasis kintamasis yra netinkamo tipo.');
+        return 'Pirmasis kintamasis yra netinkamo tipo.';
+    }
+    if ( tekstas.length === 0 ||
+         tekstas.length > 100 ) {
+        console.log('Pirmojo kintamojo reikšmė yra netinkamo dydžio.');
+        return 'Pirmojo kintamojo reikšmė yra netinkamo dydžio.';
+    }
+    if ( typeof(zingsnis) !== 'number' ) {
+        console.log('Antrasis kintamasis yra netinkamo tipo.');
+        return 'Antrasis kintamasis yra netinkamo tipo.';
+    }
+    if ( zingsnis === 0 ) {
+        console.log('Antrasis kintamasis turi būti ne lygus nuliui.');
+        return 'Antrasis kintamasis turi būti ne lygus nuliui.';
+    }
+    if ( tekstas.length < zingsnis ) {
+        console.log('Antrasis kintamasis turi būti ne didesnis už pateikto teksto ilgį.');
+        return 'Antrasis kintamasis turi būti ne didesnis už pateikto teksto ilgį.';
+    }
+    if ( tekstas.length < -zingsnis ) {
+        console.log('Antrasis kintamasis turi būti ne didesnis už pateikto teksto ilgį.');
+        return 'Antrasis kintamasis turi būti ne didesnis už pateikto teksto ilgį.';
+    }
+    // Math.floor(2.99999) = 2
+    // Math.round(2.6) = 3
+    // Math.round(2.5) = 3
+    // Math.round(2.499999) = 2
+    // Math.round(2.4) = 2
+    // Math.ceil(2.0000001) = 3
+    if ( Math.round(zingsnis) !== zingsnis ) {
+        console.log('Antrasis kintamasis turi būti sveikas skaicius.');
+        return 'Antrasis kintamasis turi būti sveikas skaicius.';
+    }
+
+    let likesTekstas = '';
+
+    // logika
+    if ( zingsnis > 0 ) {
+        for ( let i=zingsnis-1; i<tekstas.length; i=i+zingsnis ) {
+            likesTekstas = likesTekstas + tekstas[i];
+        }
+    } else {
+        for ( let i=tekstas.length+zingsnis; i>=0; i=i+zingsnis ) {
+            likesTekstas = likesTekstas + tekstas[i];
+        }
+    }
+
+    console.log( tekstas, zingsnis, ' -> ', likesTekstas);
+    return likesTekstas;
+}
+
+isrinktiRaides( 1561, 2 );
+isrinktiRaides( '', 2 );
+isrinktiRaides( 'askjdla', 'asdgajs' );
+isrinktiRaides( 'abc', 0 );
+isrinktiRaides( 'abc', 4 );
+isrinktiRaides( 'abcdefghijkl', 2.3 );
+isrinktiRaides( 'abcdefghijkl', -Infinity );
+isrinktiRaides( 'abcdefghijkl', NaN );
+
+isrinktiRaides( 'abcdefg', 2 );
+isrinktiRaides( 'abcdefg', -2 );
+isrinktiRaides( 'abcdefghijkl', 3 );
+isrinktiRaides( 'abcdefghijkl', -3 );
