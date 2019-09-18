@@ -325,6 +325,7 @@ console.log( tusciaFunkcija() );
 
 
 console.log('--------------');
+console.log('DAUGYBA');
 
 // typeof(16165) -> 'number'
 // typeof('tekstas') -> 'string'
@@ -333,19 +334,164 @@ console.log('--------------');
 
 function daugyba( pirmas, antras ) {
     if ( typeof(pirmas) !== 'number' ) {
+        console.log('Klaida: pirma reiksme nera skaiciaus tipo.');
         return 'Klaida: pirma reiksme nera skaiciaus tipo.';
     }
     if ( typeof(antras) !== 'number' ) {
+        console.log('Klaida: antra reiksme nera skaiciaus tipo.');
         return 'Klaida: antra reiksme nera skaiciaus tipo.';
     }
+    if ( pirmas === Infinity ) {
+        console.log('Klaida: pirmas reiksme negali buti begalybe.');
+        return 'Klaida: pirmas reiksme negali buti begalybe.';
+    }
+    if ( antras === Infinity ) {
+        console.log('Klaida: antras reiksme negali buti begalybe.');
+        return 'Klaida: antras reiksme negali buti begalybe.';
+    }
+    if ( ''+pirmas === 'NaN' ) {
+        console.log('Klaida: pirmas reiksme negali buti NaN.');
+        return 'Klaida: pirmas reiksme negali buti NaN.';
+    }
+    if ( ''+antras === 'NaN' ) {
+        console.log('Klaida: antras reiksme negali buti NaN.');
+        return 'Klaida: antras reiksme negali buti NaN.';
+    }
+
     const sandauga = pirmas * antras;
+
+    console.log(pirmas, '*', antras, '=', sandauga);
     return sandauga;
 }
 
 const c = 2;
 const d = 3;
-console.log( daugyba(c, d) );
+daugyba(c, d);
 
-console.log( daugyba(7, 3) );
-console.log( daugyba('asd', 3) );
-console.log( daugyba(3, 'asd') );
+daugyba(7, 3);
+daugyba('asd', 3);
+daugyba(3, 'asd');
+daugyba(0, Infinity);
+daugyba(Infinity, 8);
+daugyba(0, NaN);
+daugyba(NaN, 8);
+daugyba(-8, -0.5);
+daugyba(-8, 0.5);
+daugyba(-0.362, 0.5);
+daugyba(1, 4511561);
+daugyba(1, 0.4511561);
+daugyba(1, 12345678901234567890123456789);
+daugyba(1, 0.12345678901234567890123456789);
+daugyba(Math.PI, Math.E);
+
+
+console.log('--------------');
+console.log('SKAITMENU KIEKIS');
+
+function skaitmenuKiekisSkaiciuje( skaicius ) {
+    if ( typeof(skaicius) !== 'number' ) {
+        console.log('Klaida: reiksme nera skaiciaus tipo.');
+        return 'Klaida: reiksme nera skaiciaus tipo.';
+    }
+    if ( isNaN(skaicius) ) {
+        console.log('Klaida: reiksme turi buti normalus skaicius.');
+        return 'Klaida: reiksme turi buti normalus skaicius.';
+    }
+    if ( isFinite(skaicius) === false ) {
+        console.log('Klaida: reiksme turi buti normalus skaicius.');
+        return 'Klaida: reiksme turi buti normalus skaicius.';
+    }
+
+    let kiekis = 0;
+    let tekstinisSkaicius = ''+skaicius;
+    
+    // pradinis spejimas, kiek skaitmenu turi sutekstintas skaicius
+    kiekis = tekstinisSkaicius.length;
+
+    // jei skaicius turi kableli, tai kiekis-1
+    // Number.isInteger(skaicius) === false
+    if ( skaicius % 1 !== 0 ) {
+        kiekis--;
+    }
+
+    // jei skaicius yra su minuso zenklu (neigiamas), tai kiekis-1
+    // tekstinisSkaicius[0] === '-'
+    if ( skaicius < 0 ) {
+        kiekis--;
+    }
+
+    console.log(skaicius, ' -> ', kiekis);
+    return kiekis;
+}
+
+skaitmenuKiekisSkaiciuje( true );
+skaitmenuKiekisSkaiciuje( "asd" );
+skaitmenuKiekisSkaiciuje( NaN );
+skaitmenuKiekisSkaiciuje( Infinity );
+
+skaitmenuKiekisSkaiciuje( 5 );
+skaitmenuKiekisSkaiciuje( 781 );
+skaitmenuKiekisSkaiciuje( 37060123456 );
+skaitmenuKiekisSkaiciuje( -89 );
+skaitmenuKiekisSkaiciuje( 3.1415 );
+skaitmenuKiekisSkaiciuje( -3.1415 );
+skaitmenuKiekisSkaiciuje( 0 );
+skaitmenuKiekisSkaiciuje( -0 );
+skaitmenuKiekisSkaiciuje( +0 );
+skaitmenuKiekisSkaiciuje( 2*3 );
+skaitmenuKiekisSkaiciuje( Math.PI );
+skaitmenuKiekisSkaiciuje( 1.23e7 );         // 1.23 * 10^7
+skaitmenuKiekisSkaiciuje( 1e-6 );
+
+console.log('dar neisspresti variantai');
+skaitmenuKiekisSkaiciuje( 1e30 );
+skaitmenuKiekisSkaiciuje( 1e-66 );
+
+
+console.log('--------------');
+console.log('DIDZIAUSIAS SKAICIUS');
+
+function didziausiasSkaiciusSarase( list ) {
+    if ( typeof(list) !== 'object' ) {
+        console.log('Klaida: reiksme turi buti saraso tipo.');
+        return 'Klaida: reiksme turi buti saraso tipo.';
+    }
+    if ( list.length === 0 ) {
+        console.log('Pateiktas sąrašas negali būti tuščias.');
+        return 'Pateiktas sąrašas negali būti tuščias.';
+    }
+
+    let didziausias = -Infinity;
+
+    // logika
+    for ( let i=0; i<list.length; i++ ) {
+        if ( !isFinite(list[i]) ) {
+            continue;
+        }
+        if ( list[i] > didziausias ) {
+            didziausias = list[i];
+        }
+    }
+
+    if ( didziausias === -Infinity ) {
+        console.log('Sarase nera nei vieno baigtinio skaiciaus.');
+        return 'Sarase nera nei vieno baigtinio skaiciaus.';
+    }
+
+    console.log(list, didziausias);
+    return didziausias;
+}
+
+didziausiasSkaiciusSarase( 'pomidoras' );
+didziausiasSkaiciusSarase( [] );
+
+didziausiasSkaiciusSarase( [ 1 ] );
+didziausiasSkaiciusSarase( [ 1, 2, 3 ] );
+didziausiasSkaiciusSarase( [ -5, 78, 14, 0, 18 ] );
+didziausiasSkaiciusSarase( [ -5, 14, 0, 18, 78, 54, 33 ] );
+didziausiasSkaiciusSarase( [ 69, 69, 69, 69, 66 ] );
+didziausiasSkaiciusSarase( [ -1, -2, -3, -4, -5, -6, -7, -8 ] );
+didziausiasSkaiciusSarase( [ 1, 2, 3, 'asdasd', 4 ] );
+didziausiasSkaiciusSarase( [ -Infinity, 'asd', 2, Infinity, 3, 'asdasd', 4 ] );
+didziausiasSkaiciusSarase( [ 'asd' ] );
+didziausiasSkaiciusSarase( [ -Infinity, -Infinity, -Infinity ] );
